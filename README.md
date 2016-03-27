@@ -1,6 +1,6 @@
 # play-hal
 
-A [HAL](http://tools.ietf.org/html/draft-kelly-json-hal) library based on [Play-JSON](https://www.playframework.com/documentation/2.3.x/ScalaJson). 
+A [HAL - Hypertext Application Language](http://stateless.co/hal_specification.html) library based on [Play-JSON](https://www.playframework.com/documentation/2.3.x/ScalaJson).
 
 [![Build Status](https://travis-ci.org/hmrc/play-hal.svg?branch=master)](https://travis-ci.org/hmrc/play-hal) [ ![Download](https://api.bintray.com/packages/hmrc/releases/play-hal/images/download.svg) ](https://bintray.com/hmrc/releases/play-hal/_latestVersion)
 
