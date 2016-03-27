@@ -11,53 +11,6 @@ package object hal {
     val emptyJson = Json.parse("{}").as[JsObject]
   }
 
-  case class HalResource(links: HalLinks, state: JsObject, embedded: Vector[(String, Vector[HalResource])] = Vector.empty) {
-    def ++(other: HalResource): HalResource = {
-      val d = state ++ other.state
-      val l = links ++ other.links
-      val e = embedded ++ other.embedded
-      HalResource(l, d, e)
-    }
-
-    def include(other: HalResource) = ++(other)
-
-    def ++(link: HalLink): HalResource = {
-      this.copy(links = links ++ link)
-    }
-
-    def include(link: HalLink) = ++(link)
-  }
-
-  case class HalLink(rel: String, href: String,
-      deprecation: Option[String] = None, name: Option[String] = None, profile: Option[String] = None,
-      title: Option[String] = None, hreflang: Option[String] = None, `type`: Option[String] = None,
-      linkAttr: JsObject = Defaults.emptyJson, templated: Boolean = false) {
-
-    def withLinkAttributes(obj: JsObject) = this.copy(linkAttr = obj)
-    def withDeprecation(url: String) = this.copy(deprecation = Some(url))
-    def withName(name: String) = this.copy(name = Some(name))
-    def withProfile(profile: String) = this.copy(profile = Some(profile))
-    def withTitle(title: String) = this.copy(title = Some(title))
-    def withHreflang(lang: String) = this.copy(hreflang = Some(lang))
-    def withType(mediaType: String) = this.copy(`type` = Some(mediaType))
-  }
-
-  object HalLinks {
-    def empty = HalLinks(Vector.empty)
-  }
-
-  case class HalLinks(links: Vector[HalLink]) {
-    def ++(other: HalLinks) = {
-      HalLinks(links ++ other.links)
-    }
-
-    def include(other: HalLinks) = ++(other)
-
-    def ++(link: HalLink) = HalLinks(link +: this.links)
-
-    def include(link: HalLink) = ++(link)
-  }
-
   implicit val halLinkWrites = new Writes[HalLinks] {
 
     def writes(hal: HalLinks): JsValue = {
