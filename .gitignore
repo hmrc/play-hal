@@ -19,5 +19,5 @@ dist
 *.iws
 .DS_Store
 **/*.DS_Store
-
-    
+.tags
+*.swp

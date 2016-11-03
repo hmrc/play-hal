@@ -9,7 +9,7 @@ class TestHalConstruction extends FunSuite with Matchers {
   case class TestData(total: Int, currency: String, status: String)
   implicit val testWrites = Json.writes[TestData]
 
-  test("A mininmal HAL resource is a JSON object") {
+  test("A minimal HAL resource is a JSON object") {
     val data = TestData(20, "EUR", "shipped")
     data.asResource.json should equal(Json.toJson(data))
   }
@@ -28,7 +28,7 @@ class TestHalConstruction extends FunSuite with Matchers {
                         }""".stripMargin))
   }
 
-  test("A HAL resouce may contain links and state") {
+  test("A HAL resource may contain links and state") {
     val data = TestData(20, "EUR", "shipped")
     (data.asResource ++
       HalLink("self", "/orders") ++
@@ -73,7 +73,7 @@ class TestHalConstruction extends FunSuite with Matchers {
                   }""".stripMargin))
   }
 
-  test("a HAL resource may embed multible resources") {
+  test("a HAL resource may embed multiple resources") {
     val baseResource =
       Json.obj("currentlyProcessing" -> 14, "shippedToday" -> 20).asResource ++
         HalLink("self", "/orders") ++
@@ -180,5 +180,29 @@ class TestHalConstruction extends FunSuite with Matchers {
              }
         }""".stripMargin)
       )
+  }
+
+
+  test("multiple links with the same rel are represented as a JSON array") {
+    Hal.links(
+      HalLink("self", "/orders"),
+      HalLink("ea:admin", "/admins/2").withTitle("Fred"),
+      HalLink("ea:admin", "/admins/5").withTitle("Kate")
+    ).json should equal(
+      Json.parse("""
+           |{
+           |  "_links": {
+           |    "self": {
+           |       "href": "/orders"
+           |    },
+           |    "ea:admin": [{
+           |        "href": "/admins/2",
+           |        "title": "Fred"
+           |      }, {
+           |        "href": "/admins/5",
+           |        "title": "Kate"
+           |    }]
+           |  }
+           |}""".stripMargin))
   }
 }
