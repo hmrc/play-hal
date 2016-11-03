@@ -15,13 +15,17 @@ package object hal {
 
     def writes(hal: HalLinks): JsValue = {
 
-      val halLinks = hal.links.map { link =>
-        val href = linkToJson(link)
+      val halLinks = hal.links.groupBy(_.rel).map { case(rel, links) =>
+        rel -> links.map { link =>
+          val href = linkToJson(link)
 
-        val links = if (link.templated) href + ("templated" -> JsBoolean(true)) else href
-        link.rel -> links
+          if (link.templated) href + ("templated" -> JsBoolean(true)) else href
+        }
+      } map {
+        case (rel, links) if links.size == 1 => rel -> links.head
+        case (rel, links) => rel -> JsArray(links)
       }
-      Json.obj("_links" -> JsObject(halLinks))
+      Json.obj("_links" -> JsObject(halLinks.toSeq))
     }
 
     def linkToJson(link: HalLink): JsObject = {
