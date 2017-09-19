@@ -19,8 +19,8 @@ lazy val simpleReactiveMongo = (project in file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning)
   .settings(
     autoSourceHeader := false,
-    scalaVersion := "2.11.8",
+    scalaVersion := "2.12.2",
     libraryDependencies ++= appDependencies,
     resolvers += Resolver.typesafeRepo("releases"),
-    crossScalaVersions := Seq("2.11.8")
+    crossScalaVersions := Seq("2.11.8", "2.12.2")
   )
