@@ -21,6 +21,7 @@ lazy val simpleReactiveMongo = (project in file("."))
   .settings(
     majorVersion := 1,
     autoSourceHeader := false,
+    makePublicallyAvailableOnBintray := true,
     scalaVersion := "2.11.8",
     libraryDependencies ++= appDependencies,
     resolvers += Resolver.typesafeRepo("releases"),
