@@ -1,3 +1,4 @@
+import PlayCrossCompilation._
 import uk.gov.hmrc.SbtArtifactory
 import uk.gov.hmrc.SbtAutoBuildPlugin.autoSourceHeader
 
@@ -12,5 +13,6 @@ lazy val simpleReactiveMongo = (project in file("."))
     scalaVersion := "2.11.12",
     libraryDependencies ++= Dependencies(),
     resolvers += Resolver.typesafeRepo("releases"),
-    crossScalaVersions := Seq("2.11.12")
+    crossScalaVersions := Seq("2.11.12"),
+    playCrossCompilationSettings
   )
