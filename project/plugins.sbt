@@ -3,10 +3,10 @@ resolvers += Resolver.url("hmrc-sbt-plugin-releases",
 
 resolvers += "HMRC Releases" at "https://dl.bintray.com/hmrc/releases"
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "1.13.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "2.9.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "1.15.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "2.1.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "0.14.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "1.3.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-play-cross-compilation" % "0.12.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-play-cross-compilation" % "0.20.0")
