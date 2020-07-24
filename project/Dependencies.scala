@@ -15,12 +15,10 @@ object Dependencies {
       ),
       play26 = Seq(
         "com.typesafe.play" %% "play-ws" % play26Version % "provided",
-        // there doesn't seem to be a later version of play-json than 2.6.13
         "com.typesafe.play" %% "play-json" % "2.6.13" % "provided"
       ),
       play27 = Seq(
         "com.typesafe.play" %% "play-ws" % play27Version % "provided",
-        // there doesn't seem to be a later version of play-json than 2.6.13
         "com.typesafe.play" %% "play-json" % "2.7.4" % "provided"
       )
     )
