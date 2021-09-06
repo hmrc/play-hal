@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 HM Revenue & Customs
+ * Copyright 2021 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package play.api.hal
 
-import org.scalatest.{ FunSuite, Matchers }
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 import play.api.hal.Hal._
 import play.api.libs.json.Json
 
-class TestHalConstruction extends FunSuite with Matchers {
+class TestHalConstruction extends AnyFunSuite with Matchers {
 
   case class TestData(total: Int, currency: String, status: String)
   implicit val testWrites = Json.writes[TestData]

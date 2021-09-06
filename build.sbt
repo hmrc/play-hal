@@ -7,7 +7,7 @@ name := "play-hal"
 lazy val root = (project in file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
   .settings(
-    majorVersion := 2,
+    majorVersion := 3,
     forceLicenceHeader := false,
     makePublicallyAvailableOnBintray := true,
     scalaVersion := "2.12.10",
