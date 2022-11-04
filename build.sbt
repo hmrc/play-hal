@@ -13,6 +13,6 @@ lazy val root = (project in file("."))
     scalaVersion := "2.13.8",
     libraryDependencies ++= Dependencies(),
     resolvers += Resolver.typesafeRepo("releases"),
-    crossScalaVersions := Seq("2.11.12", "2.12.10", "2.13.8"),
+    crossScalaVersions := Seq("2.12.10", "2.13.8"),
     playCrossCompilationSettings
   )
