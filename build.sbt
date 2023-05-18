@@ -9,7 +9,7 @@ lazy val root = (project in file("."))
   .settings(
     majorVersion := 3,
     forceLicenceHeader := false,
-    makePublicallyAvailableOnBintray := true,
+    isPublicArtefact := true,
     scalaVersion := "2.13.8",
     libraryDependencies ++= Dependencies(),
     resolvers += Resolver.typesafeRepo("releases"),
