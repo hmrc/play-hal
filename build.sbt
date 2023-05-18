@@ -1,15 +1,14 @@
 import PlayCrossCompilation._
-import uk.gov.hmrc.SbtArtifactory
 import uk.gov.hmrc.SbtAutoBuildPlugin.forceLicenceHeader
 
 name := "play-hal"
 
 lazy val root = (project in file("."))
-  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
+  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning)
   .settings(
     majorVersion := 3,
     forceLicenceHeader := false,
-    makePublicallyAvailableOnBintray := true,
+    isPublicArtefact := true,
     scalaVersion := "2.13.8",
     libraryDependencies ++= Dependencies(),
     resolvers += Resolver.typesafeRepo("releases"),
