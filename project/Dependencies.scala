@@ -17,7 +17,7 @@ object Dependencies {
       shared = Seq(
         "org.scalatest"  %% "scalatest"     % "3.2.9"  % Test,
         "org.pegdown" % "pegdown" % "1.6.0" % Test,
-        "com.vladsch.flexmark" % "flexmark-all" % "0.35.10"
+        "com.vladsch.flexmark" % "flexmark-all" % "0.35.10" % Test
       ),
       play28 = Seq(
         "com.typesafe.play"      %% "play-test"          % play28Version % Test,
