@@ -14,23 +14,27 @@
  * limitations under the License.
  */
 
-package play.api.hal
+package play.api.mvc.hal
 
-import play.api.libs.json.JsObject
+import play.api.hal._
+import play.api.libs.json.Json
+import play.api.mvc._
 
-case class HalResource(links: HalLinks, state: JsObject, embedded: Vector[(String, Vector[HalResource])] = Vector.empty) {
-  def ++(other: HalResource): HalResource = {
-    val d = state ++ other.state
-    val l = links ++ other.links
-    val e = embedded ++ other.embedded
-    HalResource(l, d, e)
+trait HalWriteController {
+  this: AbstractController =>
+
+  def hal: Action[AnyContent] = Action {
+    Ok(Hal.state(Json.obj("foo" -> "bar")))
   }
 
-  def include(other: HalResource) = ++(other)
-
-  def ++(link: HalLink): HalResource = {
-    this.copy(links = links ++ link)
+  def halOrJson: Action[AnyContent] = Action {
+    implicit request =>
+      render {
+        case Accepts.Json() =>
+          Ok(Json.obj("foo" -> "bar"))
+        case AcceptHal() =>
+          Ok(Hal.state(Json.obj("foo" -> "bar")) ++ HalLink("self", "/orders"))
+      }
   }
 
-  def include(link: HalLink) = ++(link)
 }
