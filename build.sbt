@@ -9,7 +9,7 @@ val scala2_13 = "2.13.12"
 
 Global / concurrentRestrictions += Tags.limitSum(1, Tags.Test, Tags.Untagged)
 
-ThisBuild / majorVersion      := 3
+ThisBuild / majorVersion      := 4
 ThisBuild / isPublicArtefact  := true
 ThisBuild / scalaVersion      := scala2_13
 ThisBuild / organization      := "uk.gov.hmrc"
