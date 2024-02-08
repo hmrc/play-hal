@@ -19,12 +19,12 @@ package play.api.hal
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 import play.api.hal.Hal._
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, OWrites}
 
 class TestHalConstruction extends AnyFunSuite with Matchers {
 
   case class TestData(total: Int, currency: String, status: String)
-  implicit val testWrites = Json.writes[TestData]
+  implicit val testWrites: OWrites[TestData] = Json.writes[TestData]
 
   test("A minimal HAL resource is a JSON object") {
     val data = TestData(20, "EUR", "shipped")
@@ -32,10 +32,10 @@ class TestHalConstruction extends AnyFunSuite with Matchers {
   }
 
   test("A HAL resource may contain only links") {
-    (Hal.links(
+    Hal.links(
       HalLink("self", "/orders"),
       HalLink("next", "/orders?page=2"),
-      HalLink("find", "/orders{?id}", templated = true))).json should equal(
+      HalLink("find", "/orders{?id}", templated = true)).json should equal(
         Json.parse("""{
                        "_links": {
                        "self": { "href": "/orders" },

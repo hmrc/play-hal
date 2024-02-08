@@ -18,6 +18,7 @@ package play.api.mvc.hal
 
 import com.google.inject.Inject
 import play.api.test.Injecting
+import play.api.Play.materializer
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
@@ -28,16 +29,19 @@ import play.api.test.{DefaultAwaitTimeout, FakeRequest, ResultExtractors}
 
 import scala.concurrent.Future
 
-class ControllerTest extends AnyFunSuite
-  with Matchers
-  with ResultExtractors
-  with HeaderNames
-  with Status
-  with DefaultAwaitTimeout
-  with GuiceOneAppPerSuite
-  with Injecting {
+class ControllerTest
+  extends AnyFunSuite
+    with Matchers
+    with ResultExtractors
+    with HeaderNames
+    with Status
+    with DefaultAwaitTimeout
+    with GuiceOneAppPerSuite
+    with Injecting {
 
-  class TestController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with HalWriteController
+  class TestController @Inject()(cc: ControllerComponents)
+    extends AbstractController(cc)
+      with HalWriteController
 
   val mockControllerComponents: ControllerComponents = inject[ControllerComponents]
 
@@ -49,13 +53,13 @@ class ControllerTest extends AnyFunSuite
     (Json.parse(bodyText) \ "foo").as[String] should equal("bar")
   }
 
-  test("A Resource can be retrived as JSON") {
+  test("A Resource can be retrieved as JSON") {
     val controller = new TestController(mockControllerComponents)
     val result: Future[Result] = controller.halOrJson.apply(FakeRequest().withHeaders("Accept" -> "application/json"))
     contentType(result) should equal(Some("application/json"))
   }
 
-  test("A Resource can be retrived as HAL") {
+  test("A Resource can be retrieved as HAL") {
     val controller = new TestController(mockControllerComponents)
     val result: Future[Result] = controller.halOrJson.apply(FakeRequest().withHeaders("Accept" -> "application/hal+json"))
     contentType(result) should equal(Some("application/hal+json"))

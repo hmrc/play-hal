@@ -16,7 +16,7 @@
 
 package play.api.hal
 
-import play.api.libs.json.{ JsValue, Json, Writes, JsObject }
+import play.api.libs.json.{JsObject, JsValue, Json, Writes}
 
 object Hal {
 
@@ -73,19 +73,19 @@ object Hal {
   }
 
   implicit class HalLinkToResource(val link: HalLink) extends AnyVal {
-    def asResource = Hal.links(link)
+    def asResource: HalResource = Hal.links(link)
   }
 
   implicit class JsonToResource(val jsValue: JsValue) extends AnyVal {
-    def asResource = Hal.state(jsValue)
+    def asResource: HalResource = Hal.state(jsValue)
   }
 
   implicit class HalStateToResource[T: Writes](val link: T) {
-    def asResource = Hal.state(link)
+    def asResource: HalResource = Hal.state(link)
   }
 
   implicit class HalResourceToJson(val hal: HalResource) extends AnyVal {
-    def json = Json.toJson(hal)
+    def json: JsValue = Json.toJson(hal)
   }
 
 }

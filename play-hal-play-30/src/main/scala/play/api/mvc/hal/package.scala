@@ -22,10 +22,14 @@ import play.api.libs.json.Json
 
 package object hal {
 
-  val halMimeType = "application/hal+json"
+  private val halMimeType =
+    "application/hal+json"
 
-  val AcceptHal = Accepting(halMimeType)
+  val AcceptHal: Accepting =
+    Accepting(halMimeType)
 
   implicit def halWriter(implicit code: Codec): Writeable[HalResource] =
-    Writeable(d => code.encode(Json.toJson(d).toString()), Some(halMimeType))
+    Writeable(halResource =>
+      code.encode(Json.toJson(halResource).toString()), Some(halMimeType)
+    )
 }
