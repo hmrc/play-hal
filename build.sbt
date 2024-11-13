@@ -26,7 +26,7 @@ def copyPlay30Sources(module: Project) =
 
 
 lazy val play30 = Project(s"$libName-play-30", file(s"$libName-play-30"))
-  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning)
+  .enablePlugins()
   .settings(
     libraryDependencies ++= compile30 ++ test30,
     crossScalaVersions := Seq(scala_3)
