@@ -47,7 +47,7 @@ class ControllerTest
 
   test("A HAL Resource should be writeable") {
     val controller = new TestController(mockControllerComponents)
-    val result: Future[Result] = controller.hal().apply(FakeRequest())
+    val result: Future[Result] = controller.hal.apply(FakeRequest())
     val bodyText: String = contentAsString(result)
     contentType(result) should equal(Some("application/hal+json"))
     (Json.parse(bodyText) \ "foo").as[String] should equal("bar")
